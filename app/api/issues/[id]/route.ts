@@ -4,42 +4,50 @@ import prisma from "@/prisma/client";
 import { createIssueSchema } from "@/app/ValidationSchema";
 import { Status } from "@prisma/client";
 
-
 export async function DELETE(
-
   request: NextRequest,
   { params }: { params: { id: string } }
-)  {
+) {
   console.log('Received DELETE request with params:', params);
-const issue = await prisma.issue.findUnique({
-    where: { id: parseInt(params.id) },
-  });
+  const { id } = params;
 
+  try {
+    const issue = await prisma.issue.findUnique({
+      where: { id: parseInt(id, 10) },
+    });
 
-  if (!issue)
+    if (!issue) {
+      return NextResponse.json(
+        { error: "Invalid issue" },
+        { status: 404 }
+      );
+    }
+
+    await prisma.issue.delete({
+      where: { id: issue.id },
+    });
+
+    return NextResponse.json({});
+  } catch (error) {
+    console.error('An error occurred while deleting the issue:', error);
     return NextResponse.json(
-      { error: "Invalid issue" },
-      { status: 404 }
+      { error: 'Internal server error' },
+      { status: 500 }
     );
-
-  await prisma.issue.delete({
-    where: { id: issue.id },
-  });
-
-  return NextResponse.json({});
+  }
 }
-// change this to follow like the first one 
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
   const { id } = params;
   const body = await request.json();
-  const {status} = body
+  const { status } = body;
 
   try {
     const updatedIssue = await prisma.issue.update({
-      where: { id: parseInt(id as string, 10) },
+      where: { id: parseInt(id, 10) },
       data: { status },
     });
 
