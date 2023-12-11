@@ -63,7 +63,7 @@ const IssuesList = () => {
       {!loading && !error && (
         <ul className='flex flex-col space-y-6 max-w-2xl'>
           {issues.map((issue) => (
-            <div>
+            <div key={issue.id} >
             <Card className='border border-orange-700 rounded hover:scale-105 transition-transform' key={issue.id}>
           <div className="flex items-center">
             <div className=" mb-3 flex gap-x-2">

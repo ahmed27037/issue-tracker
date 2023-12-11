@@ -39,7 +39,7 @@ const DefaultPage = () => {
               <strong>Edit and Delete Issues:</strong> Each issue in the list can be edited or deleted as needed.
             </li>
             <li>
-              <strong>Update Issue Status:</strong> Change the status of an issue between "Open," "In Progress," and "Closed."
+              <strong>Update Issue Status:</strong> Change the status of an issue between Open, In Progress, and "Closed.
             </li>
             <li>
               <strong>View Statistics:</strong> Check the statistics page to see graphical representations of the distribution
