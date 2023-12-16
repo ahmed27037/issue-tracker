@@ -24,6 +24,7 @@ The Issue Tracker is a multiwebapp tailored for developers, project managers, an
 
 - clone project using git clone (url)
 - download mySQL and do the usual setups
+- run npx prisma migrate dev to get the tables on your mysql but only after you setup your mysql
 - make a .env file
   
 - ### on the .env file
